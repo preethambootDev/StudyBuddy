@@ -42,11 +42,11 @@ async def embed(subject:str,request:Request):
             else:
                 process=asyncio.create_task(task['function'](results))
                 
-            yield f'data: {task['msg']}\n\n'
+            yield f"data: {task['msg']}\n\n"
             while not process.done():
                 if await request.is_disconnected():
                     return
-                yield f'data: {task['msg']}\n\n'
+                yield f"data: {task['msg']}\n\n"
                 await asyncio.sleep(0.5)
             if process.done():
                 results=process.result()

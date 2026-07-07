@@ -20,9 +20,17 @@ const WS_BASE = 'ws://localhost:8000/ws/msg';
 
 // ── Markdown renderer (sync) ───────────────────────────────────────────────────
 
-function renderMd(content: string): { __html: string } {
-  const result = marked.parse(content);
-  return { __html: typeof result === 'string' ? result : content };
+function renderMd(content: string | unknown[]): { __html: string } {
+  const text = Array.isArray(content)
+    ? content
+        .map((part: any) =>
+          typeof part === 'string' ? part : part?.text ?? ''
+        )
+        .join('')
+    : content;
+
+  const result = marked.parse(text ?? '');
+  return { __html: typeof result === 'string' ? result : text };
 }
 
 // ── ThinkingSteps ──────────────────────────────────────────────────────────────

@@ -54,5 +54,5 @@ async def planner(websocket:WebSocket,subject:str):
                     break
     except WebSocketDisconnect:
         print("Diconnected")
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(e)
