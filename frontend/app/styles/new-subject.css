@@ -1,0 +1,99 @@
+.ns-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+
+/* Theme tokens: defined once, overridden for dark mode, so rule order never matters */
+.ns-modal {
+  --ns-bg: #ffffff;
+  --ns-fg: #111111;
+  --ns-input-bg: #ffffff;
+  --ns-input-fg: #111111;
+  --ns-placeholder: #8a8a8a;
+  --ns-border: #d4d4d4;
+  --ns-log-bg: #fafafa;
+  --ns-primary-bg: #111111;
+  --ns-primary-fg: #ffffff;
+  --ns-focus: #4f7cff;
+
+  width: 100%; max-width: 480px; max-height: 90vh; overflow: auto;
+  background: var(--ns-bg); color: var(--ns-fg);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  .ns-modal {
+    --ns-bg: #1f1f1f;
+    --ns-fg: #eeeeee;
+    --ns-input-bg: #2a2a2a;
+    --ns-input-fg: #f5f5f5;
+    --ns-placeholder: #8f8f8f;
+    --ns-border: #444444;
+    --ns-log-bg: #262626;
+    --ns-primary-bg: #f5f5f5;
+    --ns-primary-fg: #111111;
+    color-scheme: dark;
+  }
+}
+
+.ns-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 0; }
+.ns-title { margin: 0; font-size: 18px; font-weight: 600; }
+.ns-close { background: none; border: 0; font-size: 24px; line-height: 1; cursor: pointer; color: inherit; opacity: .6; }
+.ns-close:hover:not(:disabled) { opacity: 1; }
+.ns-close:disabled { opacity: .25; cursor: not-allowed; }
+.ns-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px; }
+.ns-footer { padding: 0 20px 20px; display: flex; justify-content: flex-end; }
+.ns-field { display: flex; flex-direction: column; gap: 6px; }
+.ns-label { font-size: 13px; font-weight: 500; opacity: .75; }
+
+/* Subject name input: explicit colours so typed text is always visible */
+.ns-modal .ns-input {
+  padding: 10px 12px; font-size: 15px;
+  border: 1px solid var(--ns-border); border-radius: 8px;
+  background-color: var(--ns-input-bg);
+  color: var(--ns-input-fg);
+  -webkit-text-fill-color: var(--ns-input-fg);
+  caret-color: var(--ns-input-fg);
+}
+.ns-modal .ns-input::placeholder { color: var(--ns-placeholder); opacity: 1; -webkit-text-fill-color: var(--ns-placeholder); }
+.ns-modal .ns-input:focus { outline: 2px solid var(--ns-focus); outline-offset: 1px; }
+.ns-modal .ns-input:disabled { opacity: .6; }
+
+.ns-file { font-size: 14px; color: var(--ns-fg); }
+.ns-filelist { margin: 4px 0 0; padding-left: 18px; font-size: 13px; opacity: .8; max-height: 100px; overflow: auto; }
+.ns-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.ns-btn {
+  padding: 9px 16px; font-size: 14px; border-radius: 8px; cursor: pointer;
+  border: 1px solid var(--ns-border); background: transparent; color: var(--ns-fg);
+}
+.ns-btn:disabled { opacity: .45; cursor: not-allowed; }
+.ns-btn--primary { background: var(--ns-primary-bg); color: var(--ns-primary-fg); border-color: var(--ns-primary-bg); }
+.ns-btn--ghost { border-color: #c33; color: #e55; }
+.ns-error { margin: 0; font-size: 13px; color: #e55; }
+
+.ns-log {
+  border: 1px solid var(--ns-border); background: var(--ns-log-bg); color: var(--ns-fg);
+  border-radius: 8px; padding: 10px 12px; max-height: 180px; overflow: auto;
+  display: flex; flex-direction: column; gap: 6px; font-size: 14px;
+}
+.ns-log__line { display: flex; align-items: center; gap: 8px; }
+.ns-log__line.is-done { opacity: .7; }
+.ns-log__icon { width: 14px; display: inline-flex; justify-content: center; }
+.ns-spinner {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid currentColor; border-top-color: transparent;
+  animation: ns-spin .8s linear infinite;
+}
+@keyframes ns-spin { to { transform: rotate(360deg); } }
+
+/* Header button (used by StudyChat) */
+.chat-header { display: flex; align-items: center; justify-content: space-between; }
+.new-subject-btn {
+  padding: 7px 14px; font-size: 14px; border-radius: 8px; cursor: pointer;
+  border: 1px solid #d4d4d4; background: transparent; color: inherit;
+}
+.new-subject-btn:hover { background: rgba(127, 127, 127, 0.12); }
