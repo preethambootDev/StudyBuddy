@@ -248,23 +248,31 @@ function Composer({ subjects, subject, onSubjectChange, online, busy, onSend, on
         />
         <div className="composer__bar">
           {subjects.length > 0 && (
-            <label className="pill">
-              <span className="pill__label">Subject</span>
-              <select
-                className="pill__select"
-                value={subject}
-                onChange={(e) => onSubjectChange(e.target.value)}
-                aria-label="Subject"
-              >
-                {subjects.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-              <svg className="pill__chev" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </label>
-          )}
+  <label className="pill relative inline-flex items-center gap-2 cursor-pointer focus-within:ring-2 focus-within:ring-white/30">
+    <span className="pill__label">Subject</span>
+    <span className="pill__value">{subject}</span>
+
+    <svg
+      className="pill__chev pointer-events-none"
+      width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"
+    >
+      <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+
+    <select
+      className="absolute inset-0 h-full w-full cursor-pointer opacity-0 [color-scheme:dark]"
+      value={subject}
+      onChange={(e) => onSubjectChange(e.target.value)}
+      aria-label="Subject"
+    >
+      {subjects.map((s) => (
+        <option key={s} value={s} className="bg-[#161615] text-white">
+          {s}
+        </option>
+      ))}
+    </select>
+  </label>
+)}
 
           <span className="status" role="status">
             <span className={`status__dot ${online ? 'is-online' : 'is-offline'}`} aria-hidden="true" />

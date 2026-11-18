@@ -298,3 +298,13 @@ body {
 @media (max-width: 420px) {
   .pill__label { display: none; }
 }
+.pill__select {
+  background-color: #161615;
+  color: #fff;
+  color-scheme: dark;
+}
+
+.pill__select option {
+  background-color: #161615;
+  color: #fff;
+}
